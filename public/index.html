@@ -34,11 +34,10 @@
           </form>
         </div>
         <h2>Connected users</h2>
-        
+        <p>Click on your guest name and then press enter to change username from <span>"{{user.username}}"</span>.</p>
         <div id="chat-users">
           <div ng-repeat="user in users" ng-class="{&quot;chat-current-user&quot;: user.username == username}" ng-class-even="&quot;chat-user-right&quot;" class="chat-user">
             <div ng-show="user.username == username">
-              <p>Click on your guest name and then press enter to change username from <span>"{{user.username}}"</span>.</p>
               <div ng-show="!displayChangeUsername" ng-click="displayChangeUsername=!displayChangeUsername"><span>{{user.username}}</span></div>
               <form ng-show="displayChangeUsername" ng-submit="changeUsername()">
                 <input id="change-username" size="20" ng-model="newUsername" type="text"/><img src="images/cross.png" ng-click="displayChangeUsername=false" class="icon icon-cross"/>
