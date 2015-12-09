@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="nuconferencechat">
+  <head>
+    <meta charset="utf8">
+    <title>nuconferencechat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/stylesheets/app.css">
+    <link href="//fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="page-center">
+        <h1>nu conference chat</h1>
+        <h3>Return back to <a href="http://nuconferenceplatform.herokuapp.com/#/">nuconferenceplatform</a> main site</h3>
+      </div>
+    </header>
+    
+    <div id="container" ng-controller="nuChatCtrl" class="page-center">
+      <div id="chat-section" ng-cloak="ng-cloak">
+        <div id="chat-messages">
+          <div ng-show="!messages.length" class="chat-message chat-info">
+            <div class="chat-message-username">{{robotName}}</div>
+            <div class="chat-message-content">No messages</div>
+          </div>
+          <div ng-repeat="message in messages" ng-class="{&quot;chat-info&quot;: message.user == robotName, &quot;text-right&quot;: message.user == username}" class="chat-message">
+            <div class="chat-message-username">{{message.user}}</div>
+            <div class="chat-content">{{message.content}}</div>
+          </div>
+        </div>
+        <div id="chat-send-message">
+          <form ng-submit="sendMessage()">
+            <input id="chat-input" size="60" ng-model="message" type="text"/>
+            <input id="chat-submit" type="submit" value="Send" class="btn btn-info"/>
+          </form>
+        </div>
+        <h2>Connected users</h2>
+        
+        <div id="chat-users">
+          <div ng-repeat="user in users" ng-class="{&quot;chat-current-user&quot;: user.username == username}" ng-class-even="&quot;chat-user-right&quot;" class="chat-user">
+            <div ng-show="user.username == username">
+              <p>Click on your guest name and then press enter to change username from <span>"{{user.username}}"</span>.</p>
+              <div ng-show="!displayChangeUsername" ng-click="displayChangeUsername=!displayChangeUsername"><span>{{user.username}}</span></div>
+              <form ng-show="displayChangeUsername" ng-submit="changeUsername()">
+                <input id="change-username" size="20" ng-model="newUsername" type="text"/><img src="images/cross.png" ng-click="displayChangeUsername=false" class="icon icon-cross"/>
+              </form>
+            </div>
+            <div ng-show="user.username != username">
+              <div><span>{{user.username}}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="javascripts/vendor/angular/angular.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="javascripts/vendor/underscore/underscore-min.js"></script>
+<script src="javascripts/app.js"></script>
+<script src="javascripts/services.js"></script>
+<script src="javascripts/conf.js"></script>
+<script src="javascripts/nuChatCtrl.js"></script>
+
+  </body>
+</html>
