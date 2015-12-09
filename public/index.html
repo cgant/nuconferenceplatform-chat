@@ -36,8 +36,8 @@
         <h2>Connected users</h2>
         <p>Click on your guest name and then press enter to change username from "Guest".</p>
         <div id="chat-users">
-          <p>Click on your guest name and then press enter to change username from <span>"{{user.username}}"</span>.</p>
           <div ng-repeat="user in users" ng-class="{&quot;chat-current-user&quot;: user.username == username}" ng-class-even="&quot;chat-user-right&quot;" class="chat-user">
+            <p>Click on your guest name and then press enter to change username from <span>"{{user.username}}"</span>.</p>
             <div ng-show="user.username == username">
               <div ng-show="!displayChangeUsername" ng-click="displayChangeUsername=!displayChangeUsername"><span>{{user.username}}</span></div>
               <form ng-show="displayChangeUsername" ng-submit="changeUsername()">
